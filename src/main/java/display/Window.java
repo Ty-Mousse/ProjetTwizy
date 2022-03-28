@@ -1,12 +1,17 @@
 package display;
 
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
 import org.opencv.highgui.Highgui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
@@ -43,7 +48,7 @@ public class Window {
         upload.addActionListener(e -> {
             currentFile = openFileChooser();
             if (currentFile != null) {
-                showImage(currentFile.getName(), currentFile);
+                showImage(currentFile.getName(), readImage(String.valueOf(currentFile)));
                 updateRender();
             }
         });
@@ -55,7 +60,7 @@ public class Window {
         solve.setPreferredSize(new Dimension(100, 20));
         solve.addActionListener(e -> {
             if (currentFile != null) {
-                Mat img = Highgui.imread(String.valueOf(currentFile));
+                Mat img = readImage(String.valueOf(currentFile));
                 log.append("Finding pannel...\n");
                 log.append("Result : " + this.solver.apply(img) + "\n");
             }
@@ -83,12 +88,22 @@ public class Window {
         return chooser.getSelectedFile();
     }
 
-    private void showImage(String title, File img) {
+    private static Mat readImage(String filename) {
+        Mat m = Highgui.imread(filename);
+        return m;
+    }
+
+    private void showImage(String title, Mat img) {
+        MatOfByte matOfByte = new MatOfByte();
+        Highgui.imencode(".png", img, matOfByte);
+        byte[] byteArray = matOfByte.toArray();
+        BufferedImage bufImage = null;
         try {
+            InputStream in = new ByteArrayInputStream(byteArray);
+            bufImage = ImageIO.read(in);
             JFrame frame = new JFrame();
             frame.setTitle(title);
-            frame.getContentPane().add(new JLabel(new ImageIcon(String.valueOf(img))));
-            frame.setIconImage(icon.getImage());
+            frame.getContentPane().add(new JLabel(new ImageIcon(bufImage)));
             frame.pack();
             frame.setVisible(true);
         } catch(Exception e) {
