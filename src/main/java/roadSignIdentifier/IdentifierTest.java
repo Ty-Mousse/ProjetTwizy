@@ -12,7 +12,7 @@ public class IdentifierTest {
         /*
         Test la fonction d'identification avec les differentes images de panneaux de reference
          */
-        String[] labelList= {"panneau 30","panneau 50","panneau 70","panneau 90","panneau 110","panneau double"};
+        String[] labelList= {"Panneau 30","Panneau 50","Panneau 70","Panneau 90","Panneau 110","Panneau double"};
         File f30 = new File("Images/limite_30.jpg");
         Mat m_30 = Highgui.imread(f30.getAbsolutePath());
         File f50 = new File("Images/limite_50.JPG");

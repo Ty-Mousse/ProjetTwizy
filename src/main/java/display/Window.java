@@ -3,8 +3,6 @@ package display;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 public class Window {
@@ -30,39 +28,32 @@ public class Window {
         // Ajout d'un panel
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
-
         // Ajout du bouton d'upload de fichier
         JButton upload = new JButton("Upload");
         upload.setPreferredSize(new Dimension(100, 20));
-        upload.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                currentFile = openFileChooser();
+        upload.addActionListener(e -> {
+            currentFile = openFileChooser();
+            if (currentFile != null) {
                 showImage(currentFile.getName(), currentFile);
                 updateRender();
             }
         });
         panel.add(upload, BorderLayout.PAGE_START);
-
         // Ajout du label
         panel.add(labelText);
-
         // Ajout du bouton pour reconnaitre les panneaux
         JButton solve = new JButton("Solve");
         solve.setPreferredSize(new Dimension(100, 20));
         panel.add(solve);
-
         // Ajout du textarea de logs
         log.setEditable(false);
         panel.add(log);
-
         return panel;
     }
 
     private void updateRender() {
-        if (currentFile != null) {
-            labelText.setText(currentFile.getName());
-            log.append(currentFile.getName() + " as been uploaded.\n");
-        }
+        labelText.setText(currentFile.getName());
+        log.append(currentFile.getName() + " as been uploaded.\n");
     }
 
     private File openFileChooser() {
@@ -95,5 +86,9 @@ public class Window {
 
     public File getCurrentFile() {
         return currentFile;
+    }
+
+    public TextArea getLog() {
+        return log;
     }
 }

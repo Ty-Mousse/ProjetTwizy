@@ -22,8 +22,8 @@ public class RoadSignIdentifier {
         /*
         Constructeur: Prend en paramatre un tableau d'image de reference et un tableau de label
          */
-        this.refList=refList;
-        this.labelList=labelList;
+        this.refList = refList;
+        this.labelList = labelList;
     }
 
     public String identifier(Mat imgTest) {
@@ -58,12 +58,12 @@ public class RoadSignIdentifier {
             imgRef: image de reference
             */
 
-            // resize and normalize
+            // Resize and normalize
             Mat grayImgRef = new Mat(imgRef.rows(), imgRef.cols(), imgRef.type());
             Imgproc.cvtColor(imgRef, grayImgRef, Imgproc.COLOR_BGRA2GRAY);
             Core.normalize(grayImgRef, grayImgRef, 0, 255, Core.NORM_MINMAX);
 
-            // creation du descriptor img ref
+            // Crétion du descriptor img ref
             MatOfKeyPoint imgKeyPointRef = new MatOfKeyPoint();
             Mat imgDescriptorRef = new Mat(imgRef.rows(), imgRef.cols(), imgRef.type());
 
