@@ -1,4 +1,4 @@
-package RoadSignIdentifier;
+package roadSignIdentifier;
 
 import org.opencv.core.Mat;
 import org.opencv.highgui.Highgui;
