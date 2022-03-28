@@ -10,11 +10,14 @@ import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.FeatureDetector;
 import org.opencv.imgproc.Imgproc;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class RoadSignIdentifier {
+
+    public Method identifier;
     Mat[] refList;
     String[] labelList;
 

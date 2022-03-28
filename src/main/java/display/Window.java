@@ -1,9 +1,16 @@
 package display;
 
+import org.opencv.core.Mat;
+import org.opencv.highgui.Highgui;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.concurrent.Callable;
+import java.util.function.Function;
 
 public class Window {
 
@@ -12,8 +19,9 @@ public class Window {
     private File currentFile;
     private final JLabel labelText = new JLabel("No file selected...");
     private final TextArea log = new TextArea();
+    private final Function<Mat, String> solver;
 
-    public Window (String title, int width, int height) {
+    public Window (String title, int width, int height, Function<Mat, String> solver) {
         this.window = new JFrame();
         this.window.setTitle(title);
         this.window.setSize(width, height);
@@ -22,6 +30,7 @@ public class Window {
         this.window.setIconImage(icon.getImage());
         this.window.setContentPane(this.initWindow());
         this.window.setVisible(true);
+        this.solver = solver;
     }
 
     private JPanel initWindow() {
@@ -44,6 +53,13 @@ public class Window {
         // Ajout du bouton pour reconnaitre les panneaux
         JButton solve = new JButton("Solve");
         solve.setPreferredSize(new Dimension(100, 20));
+        solve.addActionListener(e -> {
+            if (currentFile != null) {
+                Mat img = Highgui.imread(String.valueOf(currentFile));
+                log.append("Finding pannel...\n");
+                log.append("Result : " + this.solver.apply(img) + "\n");
+            }
+        });
         panel.add(solve);
         // Ajout du textarea de logs
         log.setEditable(false);
