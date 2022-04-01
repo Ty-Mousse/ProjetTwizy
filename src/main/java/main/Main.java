@@ -6,6 +6,7 @@ import imageReading.ReadingTest;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.highgui.Highgui;
+import roadSignIdentifier.IdentifierTest;
 import roadSignIdentifier.RoadSignIdentifier;
 
 import java.io.File;
