@@ -1,6 +1,8 @@
 package main;
 
 import display.Window;
+import imageReading.ImageReading;
+import imageReading.ReadingTest;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.highgui.Highgui;
@@ -15,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-        String[] labelList= {"Panneau 30","Panneau 50","Panneau 70","Panneau 90","Panneau 110","Panneau double"};
+        /*String[] labelList= {"Panneau 30","Panneau 50","Panneau 70","Panneau 90","Panneau 110","Panneau double"};
         File f30 = new File("Images/ref_30.jpg");
         Mat m_30 = Highgui.imread(f30.getAbsolutePath());
         File f50 = new File("Images/ref_50.JPG");
@@ -30,6 +32,11 @@ public class Main {
         RoadSignIdentifier identifier = new RoadSignIdentifier(refList, labelList);
 
         Function<Mat, String> function = identifier::identifier;
-        Window window = new Window("PanelFinder", 540, 240, function);
+        Window window = new Window("PanelFinder", 540, 240, function);*/
+
+        ReadingTest Im = new ReadingTest();
+        Im.test();
+
+
     }
 }

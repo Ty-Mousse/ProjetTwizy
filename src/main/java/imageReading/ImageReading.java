@@ -4,20 +4,20 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
-
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
-
 import org.opencv.highgui.Highgui;
 
 
+
+
 public class ImageReading {
+    public ImageReading(){}
+
 
     public static Mat LectureImage(String fichier) {
         File f = new File(fichier);
