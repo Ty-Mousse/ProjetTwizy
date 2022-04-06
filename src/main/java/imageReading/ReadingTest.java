@@ -11,7 +11,7 @@ public class ReadingTest {
          */
     ImageReading IR = new ImageReading();
     Mat mat = IR.LectureImage("Images/limite_30.jpg");
-    IR.ImShow("caca", mat);
+    IR.ImShow("test", mat);
     System.out.println(mat);
 
     }

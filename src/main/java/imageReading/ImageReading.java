@@ -12,17 +12,11 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.highgui.Highgui;
 
-
-
-
 public class ImageReading {
-    public ImageReading(){}
-
 
     public static Mat LectureImage(String fichier) {
         File f = new File(fichier);
         Mat m = Highgui.imread(f.getAbsolutePath());
-        System.out.println(f.getAbsolutePath());
         return m;
     }
 
@@ -43,9 +37,4 @@ public class ImageReading {
             e.printStackTrace();
         }
     }
-
-
-
-
-
 }

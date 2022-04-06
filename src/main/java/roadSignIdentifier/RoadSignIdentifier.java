@@ -17,7 +17,6 @@ import java.util.List;
 
 public class RoadSignIdentifier {
 
-    public Method identifier;
     Mat[] refList;
     String[] labelList;
 

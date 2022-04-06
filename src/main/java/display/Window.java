@@ -1,37 +1,30 @@
 package display;
 
 import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
-import org.opencv.highgui.Highgui;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.concurrent.Callable;
 import java.util.function.Function;
+
+import static imageReading.ImageReading.*;
 
 public class Window {
 
-    private final ImageIcon icon = new ImageIcon("./src/main/resources/logo.png");
     private final JFrame window;
     private File currentFile;
     private final JLabel labelText = new JLabel("No file selected...");
     private final TextArea log = new TextArea();
-    private final Function<Mat, String> solver;
+    private final Function<Mat, Mat> solver;
 
-    public Window (String title, int width, int height, Function<Mat, String> solver) {
+    public Window (String title, int width, int height, Function<Mat, Mat> solver) {
         this.window = new JFrame();
         this.window.setTitle(title);
         this.window.setSize(width, height);
         this.window.setResizable(false);
         this.window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        ImageIcon icon = new ImageIcon("./src/main/resources/logo.png");
         this.window.setIconImage(icon.getImage());
         this.window.setContentPane(this.initWindow());
         this.window.setVisible(true);
@@ -48,7 +41,7 @@ public class Window {
         upload.addActionListener(e -> {
             currentFile = openFileChooser();
             if (currentFile != null) {
-                showImage(currentFile.getName(), readImage(String.valueOf(currentFile)));
+                ImShow(currentFile.getName(), LectureImage(String.valueOf(currentFile)));
                 updateRender();
             }
         });
@@ -60,9 +53,10 @@ public class Window {
         solve.setPreferredSize(new Dimension(100, 20));
         solve.addActionListener(e -> {
             if (currentFile != null) {
-                Mat img = readImage(String.valueOf(currentFile));
+                Mat img = LectureImage(String.valueOf(currentFile));
                 log.append("Finding pannel...\n");
-                log.append("Result : " + this.solver.apply(img) + "\n");
+                //log.append("Result : " + this.solver.apply(img) + "\n");
+                ImShow("Solution", this.solver.apply(img));
             }
         });
         panel.add(solve);
@@ -86,29 +80,6 @@ public class Window {
             System.out.println("You chose to open this file: " + chooser.getSelectedFile().getName());
         }
         return chooser.getSelectedFile();
-    }
-
-    private static Mat readImage(String filename) {
-        Mat m = Highgui.imread(filename);
-        return m;
-    }
-
-    private void showImage(String title, Mat img) {
-        MatOfByte matOfByte = new MatOfByte();
-        Highgui.imencode(".png", img, matOfByte);
-        byte[] byteArray = matOfByte.toArray();
-        BufferedImage bufImage = null;
-        try {
-            InputStream in = new ByteArrayInputStream(byteArray);
-            bufImage = ImageIO.read(in);
-            JFrame frame = new JFrame();
-            frame.setTitle(title);
-            frame.getContentPane().add(new JLabel(new ImageIcon(bufImage)));
-            frame.pack();
-            frame.setVisible(true);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public JFrame getWindow() {
