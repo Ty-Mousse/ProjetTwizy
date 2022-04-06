@@ -55,7 +55,7 @@ public class Window {
             if (currentFile != null) {
                 Mat img = LectureImage(String.valueOf(currentFile));
                 log.append("Finding pannel...\n");
-                //log.append("Result : " + this.solver.apply(img) + "\n");
+                log.append("Result : à ajouter\n");
                 ImShow("Solution", this.solver.apply(img));
             }
         });

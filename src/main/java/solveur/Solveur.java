@@ -5,6 +5,7 @@ import org.opencv.highgui.Highgui;
 import roadSignIdentifier.RoadSignIdentifier;
 import java.io.File;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -29,7 +30,7 @@ public class Solveur {
 
     public static Mat solve(Mat m) {
         List<Mat> results = extrairePanneau(m);
-        List<String> labels = null;
+        List<String> labels = new ArrayList<String>();
         for (Mat current:results) {
             assert false;
             labels.add(signIdentifier.identifier(current));
