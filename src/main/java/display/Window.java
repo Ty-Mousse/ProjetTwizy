@@ -15,7 +15,7 @@ public class Window {
     private final JFrame window;
     private File currentFile;
     private final JLabel labelText = new JLabel("No file selected...");
-    private final TextArea log = new TextArea();
+    private static final TextArea log = new TextArea();
     private final Function<Mat, Mat> solver;
 
     public Window (String title, int width, int height, Function<Mat, Mat> solver) {
@@ -55,7 +55,6 @@ public class Window {
             if (currentFile != null) {
                 Mat img = LectureImage(String.valueOf(currentFile));
                 log.append("Finding pannel...\n");
-                log.append("Result : à ajouter\n");
                 ImShow("Solution", this.solver.apply(img));
             }
         });
@@ -90,7 +89,7 @@ public class Window {
         return currentFile;
     }
 
-    public TextArea getLog() {
+    public static TextArea getLog() {
         return log;
     }
 }

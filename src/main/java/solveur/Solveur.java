@@ -1,12 +1,12 @@
 package solveur;
 
+import display.Window;
 import org.opencv.core.Mat;
 import org.opencv.highgui.Highgui;
 import roadSignIdentifier.RoadSignIdentifier;
 
 import java.awt.*;
 import java.io.File;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -29,6 +29,7 @@ public class Solveur {
     private static Mat m_30_2 = Highgui.imread(f30_2.getAbsolutePath());
     private static Mat[] refList = {m_30, m_50, m_70, m_90, m_30_2};
     private static final RoadSignIdentifier signIdentifier = new RoadSignIdentifier(refList, labelList);
+    private static final TextArea log = Window.getLog();
 
     public static Mat solve(Mat m) {
         List<Mat> results = extrairePanneau(m);
@@ -36,7 +37,7 @@ public class Solveur {
         for (Mat current:results) {
             assert false;
             String result = signIdentifier.identifier(current);
-            System.out.println(result);
+            log.append(result + "\n");
             labels.add(result);
         }
         return m;
