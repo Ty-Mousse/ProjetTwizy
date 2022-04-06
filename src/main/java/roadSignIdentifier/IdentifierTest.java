@@ -27,7 +27,7 @@ public class IdentifierTest {
         Mat[] refList={m_30,m_50,m_70,m_90};
 
         RoadSignIdentifier rdi = new RoadSignIdentifier(refList,labelList);
-        System.out.println("resultat 30: "+rdi.identifier(m_30));
-        System.out.println("resultat 30 2: "+rdi.identifier(m_30_2));
+        System.out.println("resultat 30: " + rdi.identifier(m_30));
+        System.out.println("resultat 30 2: " + rdi.identifier(m_30_2));
     }
 }

@@ -3,6 +3,8 @@ package solveur;
 import org.opencv.core.Mat;
 import org.opencv.highgui.Highgui;
 import roadSignIdentifier.RoadSignIdentifier;
+
+import java.awt.*;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -33,7 +35,9 @@ public class Solveur {
         List<String> labels = new ArrayList<String>();
         for (Mat current:results) {
             assert false;
-            labels.add(signIdentifier.identifier(current));
+            String result = signIdentifier.identifier(current);
+            System.out.println(result);
+            labels.add(result);
         }
         return m;
     }
