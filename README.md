@@ -41,7 +41,7 @@ Repositories du projet Twizy de détection de signalisation routière.
 * Affichage du résultat sous forme d'une vidéo
 
 ### Répartition des tâches
-* Clément : Affichage du résultat & mise en commun
+* Clément : Affichage du résultat & mise en commun & diagramme de classe
 * Rémi : Amélioration discrimination des panneaux 
 * Xavier : Amélioration discrimination des panneaux
 * Thomas : Détection des panneaux sur la vidéo
