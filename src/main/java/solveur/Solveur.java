@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import static roadSignDetection.RoadSignDetection.extrairePanneau;
+import static roadSignClarification.roadSignClarification.improvedDisplay;
 
 public class Solveur {
 
@@ -44,7 +45,7 @@ public class Solveur {
             log.append(result + "\n");
             labels.add(result);
         }
-
-        return m;
+        Mat finalImage = improvedDisplay(m,labels,coords);
+        return finalImage;
     }
 }
