@@ -1,5 +1,6 @@
 package roadSignIdentifier;
 
+import display.Window;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfDMatch;
@@ -10,6 +11,7 @@ import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.FeatureDetector;
 import org.opencv.imgproc.Imgproc;
 
+import java.awt.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,11 +90,6 @@ public class RoadSignIdentifier {
             qualityCriteria.add(total/cpt);// A TESTER
         }
         int index = qualityCriteria.indexOf(Collections.min(qualityCriteria));
-        /*System.out.println("All criterias: ");
-        for(double crit : qualityCriteria){
-            System.out.println(crit);
-        }
-        System.out.println("\nQuality Criteria: "+Collections.max(qualityCriteria));*/
         return labelList[index];
     }
 

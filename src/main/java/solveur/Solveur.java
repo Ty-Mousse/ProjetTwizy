@@ -45,7 +45,7 @@ public class Solveur {
             log.append(result + "\n");
             labels.add(result);
         }
-        Mat finalImage = improvedDisplay(m,labels,coords);
+        Mat finalImage = improvedDisplay(m, labels, coords);
         return finalImage;
     }
 }
