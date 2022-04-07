@@ -42,8 +42,8 @@ Repositories du projet Twizy de détection de signalisation routière.
 
 ### Répartition des tâches
 * Clément : Affichage du résultat & mise en commun & diagramme de classe
-* Rémi : Amélioration discrimination des panneaux 
-* Xavier : Amélioration discrimination des panneaux
+* Rémi : Amélioration discrimination et détection des panneaux 
+* Xavier : Amélioration discrimination et détection des panneaux
 * Thomas : Détection des panneaux sur la vidéo
 * Bertrand : importation et lecture des vidéos (classe VideoReading avec une fonction LectureVideo(File fichier), et VidShow qui lis la vidéo)
 
