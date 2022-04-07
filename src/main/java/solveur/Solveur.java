@@ -9,7 +9,6 @@ import roadSignIdentifier.RoadSignIdentifier;
 
 import java.awt.*;
 import java.io.File;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;

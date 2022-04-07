@@ -33,7 +33,7 @@ public class ImageReading {
             frame.getContentPane().add(new JLabel(new ImageIcon(bufImage)));
             frame.pack();
             frame.setVisible(true);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
