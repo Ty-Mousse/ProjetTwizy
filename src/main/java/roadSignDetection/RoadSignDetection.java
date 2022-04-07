@@ -38,7 +38,7 @@ public class RoadSignDetection {
     }
 
     // Etape 1 : Extraction des balles rouges
-    public static List<Mat> extrairePanneau(Mat m) {
+    public static ResultSignDetection extrairePanneau(Mat m) {
         Mat hsv_image = Mat.zeros(m.size(), m.type());
         Imgproc.cvtColor(m, hsv_image, Imgproc.COLOR_BGR2HSV);
         Mat img_seuillee = detecterRouge(hsv_image);
@@ -62,6 +62,7 @@ public class RoadSignDetection {
                 ListeImage.add(ball);
             }
         }
-        return ListeImage;
+        ResultSignDetection results = new ResultSignDetection(contours, ListeImage);
+        return results;
     }
 }
