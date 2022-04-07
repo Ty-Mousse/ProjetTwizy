@@ -2,11 +2,14 @@ package solveur;
 
 import display.Window;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
 import org.opencv.highgui.Highgui;
+import roadSignDetection.ResultSignDetection;
 import roadSignIdentifier.RoadSignIdentifier;
 
 import java.awt.*;
 import java.io.File;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -32,14 +35,17 @@ public class Solveur {
     private static final TextArea log = Window.getLog();
 
     public static Mat solve(Mat m) {
-        List<Mat> results = extrairePanneau(m);
+        ResultSignDetection extract = extrairePanneau(m);
+        List<Mat> images = extract.images;
+        List<MatOfPoint> coords = extract.coords;
         List<String> labels = new ArrayList<String>();
-        for (Mat current:results) {
+        for (Mat current:images) {
             assert false;
             String result = signIdentifier.identifier(current);
             log.append(result + "\n");
             labels.add(result);
         }
+
         return m;
     }
 }

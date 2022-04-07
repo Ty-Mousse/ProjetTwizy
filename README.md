@@ -16,6 +16,9 @@ Repositories du projet Twizy de détection de signalisation routière.
 * Thomas : Renvoyer une image "explicite" de la détection
 * Bertrand : Importer une image / Détection comme vue en cours
 
+## Retrospective S1
+### 
+
 ## Installation d'OpenCV
 Pour utiliser OpenCV 2.4.13 téléchargez et déplacez la dll correspondante dans
 ```

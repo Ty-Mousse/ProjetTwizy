@@ -1,5 +1,10 @@
 package roadSignDetection;
 
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+
+import java.util.List;
+
 public class ResultSignDetection {
 
     public List<MatOfPoint> coords;
