@@ -47,6 +47,9 @@ Repositories du projet Twizy de détection de signalisation routière.
 * Thomas : Détection des panneaux sur la vidéo
 * Bertrand : importation et lecture des vidéos (classe VideoReading avec une fonction LectureVideo(File fichier), et VidShow qui lis la vidéo)
 
+## Diagramme de classe
+![Diagramme de classe](./classDiagram.png?raw=true "Diagramme de classe")
+
 ## Installation d'OpenCV
 Pour utiliser OpenCV 2.4.13 téléchargez et déplacez la dll correspondante dans
 ```
