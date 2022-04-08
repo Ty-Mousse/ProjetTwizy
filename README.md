@@ -45,9 +45,9 @@ Repositories du projet Twizy de détection de signalisation routière.
 * Rémi : Amélioration discrimination et détection des panneaux 
 * Xavier : Amélioration discrimination et détection des panneaux
 * Thomas : Détection des panneaux sur la vidéo
-* Bertrand : importation et lecture des vidéos (classe VideoReading avec une fonction LectureVideo(File fichier), et VidShow qui lis la vidéo)
+* Bertrand : Importation et lecture des vidéos (classe VideoReading avec une fonction LectureVideo(File fichier), et VidShow qui lis la vidéo)
 
-## Diagramme de classe
+# Diagramme de classe
 ![Diagramme de classe](./classDiagram.png?raw=true "Diagramme de classe")
 
 ## Installation d'OpenCV
