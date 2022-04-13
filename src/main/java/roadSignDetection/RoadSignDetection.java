@@ -20,8 +20,8 @@ public class RoadSignDetection {
         Mat threshold_img1 = new Mat();
         Mat threshold_img2 = new Mat();
         Mat threshold_img = new Mat();
-        Core.inRange(hsv_image,  new Scalar(0,100,100),  new Scalar(10,255,255),  threshold_img1);
-        Core.inRange(hsv_image,  new Scalar(160,100,100), new Scalar(179,255,255), threshold_img2);
+        Core.inRange(hsv_image,  new Scalar(0,100,50),  new Scalar(10,255,255),  threshold_img1);
+        Core.inRange(hsv_image,  new Scalar(160,100,50), new Scalar(179,255,255), threshold_img2);
         Core.bitwise_or(threshold_img1,  threshold_img2, threshold_img);
         Imgproc.GaussianBlur(threshold_img,  threshold_img, new Size(9,9), 2,2);
         return threshold_img;
@@ -43,10 +43,13 @@ public class RoadSignDetection {
         Imgproc.cvtColor(m, hsv_image, Imgproc.COLOR_BGR2HSV);
         Mat img_seuillee = detecterRouge(hsv_image);
         List<MatOfPoint> contours = detecterContours(img_seuillee);
+
         List<Mat> ListeImage = new ArrayList();
+        List<MatOfPoint> contoursCercles = new ArrayList();
         MatOfPoint2f matOfPoint2f = new MatOfPoint2f();
         float[] radius = new float[1];
         Point center = new Point();
+
         for (int c = 0; c < contours.size(); c++) {
             MatOfPoint contour = contours.get(c);
             double contourArea = Imgproc.contourArea(contour);
@@ -60,9 +63,10 @@ public class RoadSignDetection {
                 Mat ball = Mat.zeros(tmp.size(), tmp.type());
                 tmp.copyTo(ball);
                 ListeImage.add(ball);
+                contoursCercles.add(contour);
             }
         }
-        ResultSignDetection results = new ResultSignDetection(contours, ListeImage);
+        ResultSignDetection results = new ResultSignDetection(contoursCercles, ListeImage);
         return results;
     }
 }

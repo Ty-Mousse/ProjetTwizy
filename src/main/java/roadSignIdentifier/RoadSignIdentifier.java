@@ -5,10 +5,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfDMatch;
 import org.opencv.core.MatOfKeyPoint;
-import org.opencv.features2d.DMatch;
-import org.opencv.features2d.DescriptorExtractor;
-import org.opencv.features2d.DescriptorMatcher;
-import org.opencv.features2d.FeatureDetector;
+import org.opencv.features2d.*;
 import org.opencv.imgproc.Imgproc;
 
 import java.awt.*;
@@ -16,6 +13,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static imageReading.ImageReading.ImShow;
 
 public class RoadSignIdentifier {
 
@@ -42,6 +41,7 @@ public class RoadSignIdentifier {
 
         //resize and normalize
         Mat grayImgTest = new Mat(imgTest.rows(), imgTest.cols(), imgTest.type());
+        Imgproc.resize(imgTest, imgTest, refList[0].size());
         Imgproc.cvtColor(imgTest, grayImgTest, Imgproc.COLOR_BGRA2GRAY);
         Core.normalize(grayImgTest, grayImgTest, 0, 255, Core.NORM_MINMAX);
 
@@ -66,6 +66,7 @@ public class RoadSignIdentifier {
             Mat grayImgRef = new Mat(imgRef.rows(), imgRef.cols(), imgRef.type());
             Imgproc.cvtColor(imgRef, grayImgRef, Imgproc.COLOR_BGRA2GRAY);
             Core.normalize(grayImgRef, grayImgRef, 0, 255, Core.NORM_MINMAX);
+            // Imgproc.resize(grayImgRef, grayImgRef, grayImgTest.size());
 
             // Crétion du descriptor img ref
             MatOfKeyPoint imgKeyPointRef = new MatOfKeyPoint();
@@ -79,18 +80,25 @@ public class RoadSignIdentifier {
             DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE);
             matcher.match(imgDescriptorTest, imgDescriptorRef, matchs);
 
+            /*
+
+            Mat matchedImage = new Mat(grayImgRef.rows(), grayImgRef.cols()*2, grayImgRef.type());
+            Features2d.drawMatches(grayImgTest, imgKeyPointTest, grayImgRef, imgKeyPointRef, matchs, matchedImage);
+            ImShow("testo",matchedImage);
+
+             */
+
             //critère sur la distance minimal entre les KeyPoints des images
             List<DMatch> DmatchList = matchs.toList();
-            int cpt=0;
+            int cpt = 0;
             double total = 0;
-            for(DMatch dmatch : DmatchList){
+            for (DMatch dmatch : DmatchList) {
                 cpt++;
-                total+=dmatch.distance;
+                total += dmatch.distance;
             }
-            qualityCriteria.add(total/cpt);// A TESTER
+            qualityCriteria.add(total / cpt);// A TESTER
         }
         int index = qualityCriteria.indexOf(Collections.min(qualityCriteria));
         return labelList[index];
     }
-
 }
