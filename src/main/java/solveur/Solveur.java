@@ -19,7 +19,7 @@ import static roadSignClarification.roadSignClarification.improvedDisplay;
 public class Solveur {
 
     public static Function<Mat, Mat> solve;
-    private static String[] labelList = {"Panneau 30","Panneau 50","Panneau 70","Panneau 90","Panneau 110","interdiction double"};
+    private static String[] labelList = {"Panneau 30","Panneau 50","Panneau 70","Panneau 90","Panneau 110","Interdiction de doubler"};
     private static File f30 = new File("Images/ref_30.jpg");
     private static Mat m_30 = Highgui.imread(f30.getAbsolutePath());
     private static File f50 = new File("Images/ref_50.JPG");
