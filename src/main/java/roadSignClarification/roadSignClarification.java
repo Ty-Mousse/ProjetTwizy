@@ -16,7 +16,7 @@ public class roadSignClarification {
             Rect rect = Imgproc.boundingRect(contour);
             Core.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0), 2);
             if (label.size() - 1 >= c) {
-                Core.putText(image, label.get(c), new Point(rect.x + rect.width + 20, rect.y + rect.height + 20), Core.FONT_HERSHEY_COMPLEX, 0.7, new Scalar(0, 255, 0), 2);
+                Core.putText(image, label.get(c), new Point(rect.x, rect.y + rect.height + 20), Core.FONT_HERSHEY_COMPLEX, 0.45, new Scalar(0, 255, 0), 2);
             }
         }
         return image;
