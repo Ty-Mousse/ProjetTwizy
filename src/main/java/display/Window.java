@@ -6,9 +6,9 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
-import java.util.function.Function;
 
 import static imageReading.ImageReading.*;
+import static solveur.Solveur.solve;
 
 public class Window {
 
@@ -16,9 +16,8 @@ public class Window {
     private File currentFile;
     private final JLabel labelText = new JLabel("No file selected...");
     private static final TextArea log = new TextArea();
-    private final Function<Mat, Mat> solver;
 
-    public Window (String title, int width, int height, Function<Mat, Mat> solver) {
+    public Window (String title, int width, int height) {
         this.window = new JFrame();
         this.window.setTitle(title);
         this.window.setSize(width, height);
@@ -28,7 +27,6 @@ public class Window {
         this.window.setIconImage(icon.getImage());
         this.window.setContentPane(this.initWindow());
         this.window.setVisible(true);
-        this.solver = solver;
     }
 
     private JPanel initWindow() {
@@ -55,7 +53,7 @@ public class Window {
             if (currentFile != null) {
                 Mat img = LectureImage(String.valueOf(currentFile));
                 log.append("Finding pannel...\n");
-                ImShow("Solution", this.solver.apply(img));
+                ImShow("Solution", solve(img));
             }
         });
         panel.add(solve);

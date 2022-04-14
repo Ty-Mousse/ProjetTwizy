@@ -11,14 +11,12 @@ import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 import static roadSignDetection.RoadSignDetection.extrairePanneau;
 import static roadSignClarification.roadSignClarification.improvedDisplay;
 
 public class Solveur {
 
-    public static Function<Mat, Mat> solve;
     private static String[] labelList = {"Panneau 30","Panneau 50","Panneau 70","Panneau 90","Panneau 110","Interdiction de doubler"};
     private static File f30 = new File("Images/ref_30.jpg");
     private static Mat m_30 = Highgui.imread(f30.getAbsolutePath());
@@ -47,7 +45,6 @@ public class Solveur {
             log.append(result + "\n");
             labels.add(result);
         }
-        Mat finalImage = improvedDisplay(m, labels, coords);
-        return finalImage;
+        return improvedDisplay(m, labels, coords);
     }
 }
