@@ -6,9 +6,12 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
 
 import static imageReading.ImageReading.*;
 import static solveur.Solveur.solve;
+import static videoReading.VideoReading.readVideo;
 
 public class Window {
 
@@ -39,7 +42,17 @@ public class Window {
         upload.addActionListener(e -> {
             currentFile = openFileChooser();
             if (currentFile != null) {
-                ImShow(currentFile.getName(), LectureImage(String.valueOf(currentFile)));
+                String fileName = currentFile.getName();
+                String[] elements = fileName.split("\\.");
+                if ((Objects.equals(elements[elements.length - 1], "mp4"))||(Objects.equals(elements[elements.length - 1], "avi"))) {
+                    try {
+                        readVideo(currentFile, false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    ImShow(currentFile.getName(), LectureImage(String.valueOf(currentFile)));
+                }
                 updateRender();
             }
         });
@@ -51,9 +64,20 @@ public class Window {
         solve.setPreferredSize(new Dimension(100, 20));
         solve.addActionListener(e -> {
             if (currentFile != null) {
-                Mat img = LectureImage(String.valueOf(currentFile));
-                log.append("Finding pannel...\n");
-                ImShow("Solution", solve(img));
+                String fileName = currentFile.getName();
+                String[] elements = fileName.split("\\.");
+                if ((Objects.equals(elements[elements.length - 1], "mp4"))||(Objects.equals(elements[elements.length - 1], "avi"))) {
+                    log.append("Finding pannel...\n");
+                    try {
+                        readVideo(currentFile, true);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    Mat img = LectureImage(String.valueOf(currentFile));
+                    log.append("Finding pannel...\n");
+                    ImShow("Solution", solve(img));
+                }
             }
         });
         panel.add(solve);
@@ -65,12 +89,12 @@ public class Window {
 
     private void updateRender() {
         labelText.setText(currentFile.getName());
-        log.append(currentFile.getName() + " as been uploaded.\n");
+        log.append(currentFile.getName() + " as been selected.\n");
     }
 
     private File openFileChooser() {
         JFileChooser chooser = new JFileChooser("./");
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG or MP4 files", "jpg", "png", "mp4");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG, MP4 or AVI files", "jpg", "png", "mp4", "avi");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(this.window);
         if(returnVal == JFileChooser.APPROVE_OPTION) {

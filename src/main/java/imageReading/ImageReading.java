@@ -1,16 +1,14 @@
 package imageReading;
 
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.InputStream;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
 import org.opencv.highgui.Highgui;
+
+import static utils.Utils.Mat2bufferedImage;
 
 public class ImageReading {
 
@@ -21,13 +19,8 @@ public class ImageReading {
     }
 
     public static void ImShow(String title, Mat img) {
-        MatOfByte matOfByte = new MatOfByte();
-        Highgui.imencode(".png",  img,  matOfByte);
-        byte[] byteArray = matOfByte.toArray();
-        BufferedImage bufImage = null;
         try {
-            InputStream in = new ByteArrayInputStream(byteArray);
-            bufImage = ImageIO.read(in);
+            BufferedImage bufImage = Mat2bufferedImage(img);
             JFrame frame = new JFrame();
             frame.setTitle(title);
             frame.getContentPane().add(new JLabel(new ImageIcon(bufImage)));
