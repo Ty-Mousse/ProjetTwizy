@@ -10,13 +10,15 @@ import org.opencv.core.Mat;
 import org.opencv.highgui.VideoCapture;
 
 import display.Window;
+
+import static solveur.Solveur.solve;
 import static utils.Utils.Mat2bufferedImage;
 
 public class VideoReading {
 
     public static void readVideo(File file, Boolean solving) {
 
-        System.load("./dll/opencv_ffmpeg2413_64.dll");
+        System.load("C:\\opencv\\build\\x64\\vc12\\bin\\opencv_ffmpeg2413_64.dll");
 
         JFrame jframe = new JFrame(file.getName());
         JLabel vidPanel = new JLabel();
@@ -29,21 +31,16 @@ public class VideoReading {
 
         if (camera.isOpened()) {
             while (camera.read(frame)) {
-                if (!frame.empty()) {
-                    /*ImageIcon image = null;
-                    if (solving) { // Si appelé depuis bouton 'Solve'
-                        Mat result = solve(frame);
-                        image = new ImageIcon(Mat2bufferedImage(result));
-                    } else { // Sinon simple ouverture du fichier
-                        image = new ImageIcon(Mat2bufferedImage(frame));
-                    }*/
-                    ImageIcon image = new ImageIcon(Mat2bufferedImage(frame));
-                    vidPanel.setIcon(image);
-                    vidPanel.repaint();
-                } else {
-                    Window.getLog().append("Video ended.\n");
-                    break;
+                ImageIcon image = null;
+                if (solving) { // Si appelé depuis bouton 'Solve'
+                    Mat result = solve(frame);
+                    image = new ImageIcon(Mat2bufferedImage(result));
+                } else { // Sinon simple ouverture du fichier
+                    image = new ImageIcon(Mat2bufferedImage(frame));
                 }
+                image = new ImageIcon(Mat2bufferedImage(frame));
+                vidPanel.setIcon(image);
+                vidPanel.repaint();
             }
         } else {
             System.out.println("Couldn't open the video.");
