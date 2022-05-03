@@ -15,6 +15,9 @@ import static utils.Utils.Mat2bufferedImage;
 public class VideoReading {
 
     public static void readVideo(File file, Boolean solving) {
+
+        System.load("./dll/opencv_ffmpeg2413_64.dll");
+
         JFrame jframe = new JFrame(file.getName());
         JLabel vidPanel = new JLabel();
         jframe.setContentPane(vidPanel);
