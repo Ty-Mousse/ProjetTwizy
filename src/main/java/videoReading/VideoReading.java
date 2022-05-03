@@ -1,7 +1,6 @@
 package videoReading;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -15,7 +14,7 @@ import static utils.Utils.Mat2bufferedImage;
 
 public class VideoReading {
 
-    public static void readVideo(File file, Boolean solving) throws IOException {
+    public static void readVideo(File file, Boolean solving) {
         JFrame jframe = new JFrame(file.getName());
         JLabel vidPanel = new JLabel();
         jframe.setContentPane(vidPanel);
@@ -23,23 +22,23 @@ public class VideoReading {
         jframe.setVisible(true);
 
         Mat frame = new Mat();
-        VideoCapture camera = new VideoCapture("Videos/video1.avi");
+        VideoCapture camera = new VideoCapture("C:/Users/clemr/Documents/GitHub/ProjetTwizy/Videos/video1.avi");
 
         if (camera.isOpened()) {
             while (camera.read(frame)) {
                 if (!frame.empty()) {
-                /*ImageIcon image = null;
-                if (solving) { // Si appelé depuis bouton 'Solve'
-                    Mat result = solve(frame);
-                    image = new ImageIcon(Mat2bufferedImage(result));
-                } else { // Sinon simple ouverture du fichier
-                    image = new ImageIcon(Mat2bufferedImage(frame));
-                }*/
+                    /*ImageIcon image = null;
+                    if (solving) { // Si appelé depuis bouton 'Solve'
+                        Mat result = solve(frame);
+                        image = new ImageIcon(Mat2bufferedImage(result));
+                    } else { // Sinon simple ouverture du fichier
+                        image = new ImageIcon(Mat2bufferedImage(frame));
+                    }*/
                     ImageIcon image = new ImageIcon(Mat2bufferedImage(frame));
                     vidPanel.setIcon(image);
                     vidPanel.repaint();
                 } else {
-                    Window.getLog().append("Video corrupted or ended.\n");
+                    Window.getLog().append("Video ended.\n");
                     break;
                 }
             }

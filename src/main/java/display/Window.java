@@ -6,7 +6,6 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.Objects;
 
 import static imageReading.ImageReading.*;
@@ -45,11 +44,7 @@ public class Window {
                 String fileName = currentFile.getName();
                 String[] elements = fileName.split("\\.");
                 if ((Objects.equals(elements[elements.length - 1], "mp4"))||(Objects.equals(elements[elements.length - 1], "avi"))) {
-                    try {
-                        readVideo(currentFile, false);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
+                    readVideo(currentFile, false);
                 } else {
                     ImShow(currentFile.getName(), LectureImage(String.valueOf(currentFile)));
                 }
@@ -68,11 +63,7 @@ public class Window {
                 String[] elements = fileName.split("\\.");
                 if ((Objects.equals(elements[elements.length - 1], "mp4"))||(Objects.equals(elements[elements.length - 1], "avi"))) {
                     log.append("Finding pannel...\n");
-                    try {
-                        readVideo(currentFile, true);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
+                    readVideo(currentFile, true);
                 } else {
                     Mat img = LectureImage(String.valueOf(currentFile));
                     log.append("Finding pannel...\n");
