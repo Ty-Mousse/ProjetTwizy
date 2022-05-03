@@ -44,7 +44,8 @@ public class Window {
                 String fileName = currentFile.getName();
                 String[] elements = fileName.split("\\.");
                 if ((Objects.equals(elements[elements.length - 1], "mp4"))||(Objects.equals(elements[elements.length - 1], "avi"))) {
-                    readVideo(currentFile, false);
+                    Thread thread = new Thread(() -> readVideo(currentFile, false));
+                    thread.start();
                 } else {
                     ImShow(currentFile.getName(), LectureImage(String.valueOf(currentFile)));
                 }
@@ -63,7 +64,8 @@ public class Window {
                 String[] elements = fileName.split("\\.");
                 if ((Objects.equals(elements[elements.length - 1], "mp4"))||(Objects.equals(elements[elements.length - 1], "avi"))) {
                     log.append("Finding pannel...\n");
-                    readVideo(currentFile, true);
+                    Thread thread = new Thread(() -> readVideo(currentFile, true));
+                    thread.start();
                 } else {
                     Mat img = LectureImage(String.valueOf(currentFile));
                     log.append("Finding pannel...\n");

@@ -7,6 +7,7 @@ import javax.swing.*;
 import org.opencv.core.Mat;
 import org.opencv.highgui.VideoCapture;
 
+import static solveur.Solveur.solve;
 import static utils.Utils.Mat2bufferedImage;
 
 public class VideoReading {
@@ -25,14 +26,13 @@ public class VideoReading {
         VideoCapture camera = new VideoCapture(file.getAbsolutePath());
 
         while (camera.read(frame)) {
-            /*ImageIcon image = null;
+            ImageIcon image;
             if (solving) { // Si appelé depuis bouton 'Solve'
                 Mat result = solve(frame);
                 image = new ImageIcon(Mat2bufferedImage(result));
             } else { // Sinon simple ouverture du fichier
                 image = new ImageIcon(Mat2bufferedImage(frame));
-            }*/
-            ImageIcon image = new ImageIcon(Mat2bufferedImage(frame));
+            }
             vidPanel.setIcon(image);
             vidPanel.repaint();
         }

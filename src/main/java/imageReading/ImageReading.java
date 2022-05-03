@@ -30,4 +30,5 @@ public class ImageReading {
             e.printStackTrace();
         }
     }
+
 }
