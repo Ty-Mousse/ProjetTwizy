@@ -2,16 +2,11 @@ package videoReading;
 
 import java.io.File;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 import org.opencv.core.Mat;
 import org.opencv.highgui.VideoCapture;
 
-import display.Window;
-
-import static solveur.Solveur.solve;
 import static utils.Utils.Mat2bufferedImage;
 
 public class VideoReading {

@@ -13,17 +13,17 @@ import java.io.InputStream;
 public class Utils {
 
     public static BufferedImage Mat2bufferedImage(Mat image) {
-        MatOfByte matOfByte = new MatOfByte();
-        Highgui.imencode(".jpg",  image,  matOfByte);
-        byte[] byteArray = matOfByte.toArray();
-        InputStream in = new ByteArrayInputStream(byteArray);
-        BufferedImage bufImage = null;
+        MatOfByte byteMat = new MatOfByte();
+        Highgui.imencode(".jpg", image, byteMat);
+        byte[] bytes = byteMat.toArray();
+        InputStream in = new ByteArrayInputStream(bytes);
+        BufferedImage img = null;
         try {
-            bufImage = ImageIO.read(in);
+            img = ImageIO.read(in);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return bufImage;
+        return img;
     }
 
 }
