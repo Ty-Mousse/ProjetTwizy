@@ -27,24 +27,20 @@ public class VideoReading {
         jframe.setVisible(true);
 
         Mat frame = new Mat();
-        VideoCapture camera = new VideoCapture("C:/Users/clemr/Documents/GitHub/ProjetTwizy/Videos/video1.avi");
+        VideoCapture camera = new VideoCapture(file.getAbsolutePath());
 
-        if (camera.isOpened()) {
-            while (camera.read(frame)) {
-                ImageIcon image = null;
-                if (solving) { // Si appelé depuis bouton 'Solve'
-                    Mat result = solve(frame);
-                    image = new ImageIcon(Mat2bufferedImage(result));
-                } else { // Sinon simple ouverture du fichier
-                    image = new ImageIcon(Mat2bufferedImage(frame));
-                }
+        while (camera.read(frame)) {
+            /*ImageIcon image = null;
+            if (solving) { // Si appelé depuis bouton 'Solve'
+                Mat result = solve(frame);
+                image = new ImageIcon(Mat2bufferedImage(result));
+            } else { // Sinon simple ouverture du fichier
                 image = new ImageIcon(Mat2bufferedImage(frame));
-                vidPanel.setIcon(image);
-                vidPanel.repaint();
-            }
-        } else {
-            System.out.println("Couldn't open the video.");
-            Window.getLog().append("Couldn't open the video.");
+            }*/
+            ImageIcon image = new ImageIcon(Mat2bufferedImage(frame));
+            vidPanel.setIcon(image);
+            vidPanel.repaint();
         }
+
     }
 }
