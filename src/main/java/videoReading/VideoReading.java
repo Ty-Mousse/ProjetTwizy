@@ -19,7 +19,7 @@ public class VideoReading {
         JFrame jframe = new JFrame(file.getName());
         JLabel vidPanel = new JLabel();
         jframe.setContentPane(vidPanel);
-        jframe.setSize(720, 480);
+        jframe.setSize(1080, 720);
         jframe.setVisible(true);
 
         Mat frame = new Mat();
